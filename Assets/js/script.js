@@ -1,79 +1,73 @@
-// Assignment Code
+const allLowercase = "abcdefghijklmnopqrstuvwxyz";
+const allUppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+const allSpecial = "#$%&'()*+,-./:;<=>?@[\]^_`{|}~";
+const allNumber = "0123456789";
+
 var generateBtn = document.querySelector("#generate");
 
-// Generate password function
-// if lowercase selected, add lowercase array to password pool
-// if uppercase selected, add uppercase array to password pool
-// if numbers selected, add random number between 0-9
-// if special characters selected, add special characters array to pool
-// choose random index number from pool for each character
-
-let randomLowercase = "abcdefghijklmnopqrstuvwxyz";
-let randomUppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-let randomSpecial = "#$%&'()*+,-./:;<=>?@[\]^_`{|}~";
-let randomNumber = "0123456789";
-let passwordLength = prompt("How many characters? (8-128)")
+let passwordLength = parseInt(prompt("How many characters? (8-128)"));
+let isLowercase = confirm("Do you want to include lowercase letters?");
+let isUppercase = confirm("Do you want to include uppercase letters?");
+let isSpecial = confirm("Do you want to include special characters?");
+let isNumber = confirm("Do you want to include numbers?");
 
 function concatString(x, y) {
   return x.concat(y);
 }
+// Generate pool of potential characters for password
+// if lowercase selected, add lowercase string to potential character pool
+// if uppercase selected, add uppercase string to potential character pool
+// if special characters selected, add special characters to potential character pool
+// if numbers selected, add numbers to potential character pool
+// if no parameters selected, throw an error message
 
 function characterPool() {
-  var characterString = "";
-  if (randomLowercase === true) 
-  {
-    characterString = concatString(characterString, randomLowercase);
-    console.log(characterString);
+  var tempString = "";
+  if (isLowercase === true) {
+    tempString = concatString(tempString, allLowercase);
+    // console.log for testing purposes
+    console.log("tempString is " + tempString);
   }
-  if (randomUppercase === true) 
-  {
-characterString = concatString(characterString, randomUppercase);
+
+  if (isUppercase === true) {
+    tempString = concatString(tempString, allUppercase);
+    console.log("tempString is " + tempString);
+  }
+
+  if (isSpecial === true) {
+    tempString = concatString(tempString, allSpecial);
+    console.log("tempString is " + tempString);
+  }
+
+  if (isNumber === true) {
+    tempString = concatString(tempString, allNumber);
+    console.log("tempString is " + tempString);
+  }
+  if (isLowercase == false && isUppercase == false && isSpecial == false && isNumber == false) {
+    alert("Please enter at least one parameter to generate password.")
+  }
+  console.log("Complete tempString is " + tempString);
+  return tempString;
 }
-if (randomSpecial === true) 
-{
-  characterString = concatString(characterString, randomSpecial);
-  console.log(characterString);
-}
-else if (randomNumber === true) 
-{
-characterString = concatString(characterString, randomNumber);
-console.log(characterString);
-}
-if (randomLowercase == false && randomUppercase == false && randomSpecial == false && randomNumber == false) {
-  alert("Please enter at least one parameter to generate password.")
-}
-  // if lowercase, append randomLowercase string;
-  // if uppercase, append randomUppercase string;
-  // if special character, append randomSpecial string;
-  // if number selected, append randomNumber;
-}
+
+characterString = characterPool();
 
 function generatePassword() {
-
-for (let i=0; i < passwordLength; i++) 
-  {
-     (characterPool[(Math.floor(Math.random() * passwordLength))]);
+  let tempPassword = "";
+  for (let i = 0; i < passwordLength; i++) {
+    tempPassword = concatString(tempPassword, (characterString[(Math.floor(Math.random() * characterString.length))]));
+    console.log(tempPassword);
   }
+  return tempPassword;
 }
+
+console.log("Your password is: " + generatePassword());
+/*
 // Write password to the #password input
 function writePassword() {
-  var password = generatePassword();
-  var passwordText = document.querySelector("#password");
-
-  passwordText.value = password;
-
+  document.getElementById("#password").value = generatePassword();
 }
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
-// When button clicked, user is given a series of prompts:
-
-// Prompts for lowercase, uppercase, numeric and/or special characters
-// How many characters do you need? (8-128)
-// Do you want to include lowercase characters?
-// Do you want to include uppercase characters?
-// Do you want to include numbers?
-// Do you want to include special characters?
-
-// Error message if at least one character type not selected
-// Generated password displayed in an alert or written to the page
+// When button clicked, user is given a series of prompts: */
