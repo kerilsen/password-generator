@@ -1,33 +1,73 @@
+const allLowercase = "abcdefghijklmnopqrstuvwxyz";
+const allUppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+const allSpecial = "#$%&'()*+,-./:;<=>?@[\]^_`{|}~";
+const allNumber = "0123456789";
 
+var generateBtn = document.querySelector("#generate");
 
-const allLower = "abcdefghijklmnopqrstuvwxyz";
-const allUpper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-const allNumbers = "0123456789";
-const allSpecial = "!#$%&'()*+,-./:;<=>?@[]^_`{|}~";
-/*
-const passwordLength = parseInt(prompt("How many characters? (8-128)"));
+let passwordLength = parseInt(prompt("How many characters? (8-128)"));
 let isLowercase = confirm("Do you want to include lowercase letters?");
 let isUppercase = confirm("Do you want to include uppercase letters?");
 let isSpecial = confirm("Do you want to include special characters?");
 let isNumber = confirm("Do you want to include numbers?");
-let passwordString = "";
-let passwordPool = "";
-*/
-function generatePassword() {
-  // Add collection of all characters from each required parameter to pool of potential password characters
-  // Populate password string with one character from each parameter to ensure that password includes at least one of each required parameter
-  if (isLowercase) { passwordPool.concat(allLower); passwordString.concat(allLower[Math.floor(Math.random() * (allLower.length))]) };
-  if (isUppercase) { passwordPool.concat(allUpper); passwordString.concat(allUpper[Math.floor(Math.random() * (allUpper.length))]) };
-  if (isSpecial) { passwordPool.concat(allSpecial); passwordString.concat(allSpecial[Math.floor(Math.random() * (allSpecial.length))]) };
-  if (isNumber) { passwordPool.concat(allNumbers); passwordString.concat(allNumbers[Math.floor(Math.random() * (allNumbers.length))]) };
-  // If no parameters selected, throw an error message
-  if ((!isLowercase) && (!isUppercase) && (!isSpecial) && (!isNumber)) { alert("Please enter at least one parameter to generate password.") };
-  // Populate password string with remaining characters to reach the user's desired password length (input length - unique characters already included)
-  for (let i = 0; i++; i < (passwordLength - passwordPool.length)) {
-    passwordString.concat(passwordPool[Math.floor(Math.random() * passwordPool.length)]);
-    console.log(passwordString);
+
+function concatString(x, y) {
+  return x.concat(y);
+}
+// Generate pool of potential characters for password
+// if lowercase selected, add lowercase string to potential character pool
+// if uppercase selected, add uppercase string to potential character pool
+// if special characters selected, add special characters to potential character pool
+// if numbers selected, add numbers to potential character pool
+// if no parameters selected, throw an error message
+
+function characterPool() {
+  var tempString = "";
+  if (isLowercase === true) {
+    tempString = concatString(tempString, allLowercase);
+    // console.log for testing purposes
+    console.log("tempString is " + tempString);
   }
-  return passwordString;
+
+  if (isUppercase === true) {
+    tempString = concatString(tempString, allUppercase);
+    console.log("tempString is " + tempString);
+  }
+
+  if (isSpecial === true) {
+    tempString = concatString(tempString, allSpecial);
+    console.log("tempString is " + tempString);
+  }
+
+  if (isNumber === true) {
+    tempString = concatString(tempString, allNumber);
+    console.log("tempString is " + tempString);
+  }
+  if (isLowercase == false && isUppercase == false && isSpecial == false && isNumber == false) {
+    alert("Please enter at least one parameter to generate password.")
+  }
+  console.log("Complete tempString is " + tempString);
+  return tempString;
 }
 
-console.log(generatePassword());
+characterString = characterPool();
+
+function generatePassword() {
+  let tempPassword = "";
+  for (let i = 0; i < passwordLength; i++) {
+    tempPassword = concatString(tempPassword, (characterString[(Math.floor(Math.random() * characterString.length))]));
+    console.log(tempPassword);
+  }
+  return tempPassword;
+}
+
+console.log("Your password is: " + generatePassword());
+/*
+// Write password to the #password input
+function writePassword() {
+  document.getElementById("#password").value = generatePassword();
+}
+
+// Add event listener to generate button
+generateBtn.addEventListener("click", writePassword);
+// When button clicked, user is given a series of prompts: */
