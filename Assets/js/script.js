@@ -1,73 +1,70 @@
-const allLowercase = "abcdefghijklmnopqrstuvwxyz";
-const allUppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-const allSpecial = "#$%&'()*+,-./:;<=>?@[\]^_`{|}~";
-const allNumber = "0123456789";
-
+const input = {};
 var generateBtn = document.querySelector("#generate");
-
-let passwordLength = parseInt(prompt("How many characters? (8-128)"));
-let isLowercase = confirm("Do you want to include lowercase letters?");
-let isUppercase = confirm("Do you want to include uppercase letters?");
-let isSpecial = confirm("Do you want to include special characters?");
-let isNumber = confirm("Do you want to include numbers?");
 
 function concatString(x, y) {
   return x.concat(y);
 }
-// Generate pool of potential characters for password
-// if lowercase selected, add lowercase string to potential character pool
-// if uppercase selected, add uppercase string to potential character pool
-// if special characters selected, add special characters to potential character pool
-// if numbers selected, add numbers to potential character pool
-// if no parameters selected, throw an error message
+
+function getUserInput() {
+  input.length = parseInt(prompt("How many characters? (8-128)"));
+  input.isLowercase = confirm("Do you want to include lowercase letters?");
+  input.isUppercase = confirm("Do you want to include uppercase letters?");
+  input.isSpecial = confirm("Do you want to include special characters?");
+  input.isNumber = confirm("Do you want to include numbers?");
+  return input;
+}
 
 function characterPool() {
+  getUserInput();
+  const allLowercase = "abcdefghijklmnopqrstuvwxyz";
+  const allUppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  const allSpecial = "#$%&'()*+,-./:;<=>?@[\]^_`{|}~";
+  const allNumber = "0123456789";
   var tempString = "";
-  if (isLowercase === true) {
+  if (input.isLowercase === true) {
     tempString = concatString(tempString, allLowercase);
-    // console.log for testing purposes
     console.log("tempString is " + tempString);
   }
 
-  if (isUppercase === true) {
+  if (input.isUppercase === true) {
     tempString = concatString(tempString, allUppercase);
     console.log("tempString is " + tempString);
   }
 
-  if (isSpecial === true) {
+  if (input.isSpecial === true) {
     tempString = concatString(tempString, allSpecial);
     console.log("tempString is " + tempString);
   }
 
-  if (isNumber === true) {
+  if (input.isNumber === true) {
     tempString = concatString(tempString, allNumber);
     console.log("tempString is " + tempString);
   }
-  if (isLowercase == false && isUppercase == false && isSpecial == false && isNumber == false) {
+  if (input.isLowercase == false && input.isUppercase == false && input.isSpecial == false && input.isNumber == false) {
     alert("Please enter at least one parameter to generate password.")
   }
   console.log("Complete tempString is " + tempString);
   return tempString;
 }
 
-characterString = characterPool();
-
 function generatePassword() {
+  let characterString = characterPool();
   let tempPassword = "";
-  for (let i = 0; i < passwordLength; i++) {
+  for (let i = 0; i < input.passwordLength; i++) {
     tempPassword = concatString(tempPassword, (characterString[(Math.floor(Math.random() * characterString.length))]));
     console.log(tempPassword);
   }
   return tempPassword;
 }
 
-console.log("Your password is: " + generatePassword());
-/*
 // Write password to the #password input
 function writePassword() {
-  document.getElementById("#password").value = generatePassword();
+  // let password = generatePassword();
+  document.getElementById("#password").textContent = generatePassword();
+
+  // document.getElementById("#password").value = password;
+  // document.querySelector("#tip-amount").textContent = tipAmount;
 }
 
 // Add event listener to generate button
-generateBtn.addEventListener("click", writePassword);
-// When button clicked, user is given a series of prompts: */
+generateBtn.addEventListener("click", writePassword); 
