@@ -1,8 +1,10 @@
+
+
 const allLower = "abcdefghijklmnopqrstuvwxyz";
 const allUpper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const allNumbers = "0123456789";
 const allSpecial = "!#$%&'()*+,-./:;<=>?@[]^_`{|}~";
-
+/*
 const passwordLength = parseInt(prompt("How many characters? (8-128)"));
 let isLowercase = confirm("Do you want to include lowercase letters?");
 let isUppercase = confirm("Do you want to include uppercase letters?");
@@ -10,7 +12,7 @@ let isSpecial = confirm("Do you want to include special characters?");
 let isNumber = confirm("Do you want to include numbers?");
 let passwordString = "";
 let passwordPool = "";
-
+*/
 function generatePassword() {
   // Add collection of all characters from each required parameter to pool of potential password characters
   // Populate password string with one character from each parameter to ensure that password includes at least one of each required parameter

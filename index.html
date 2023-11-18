@@ -19,7 +19,34 @@
       <div class="card-header">
         <h2>Generate a Password</h2>
       </div>
+      <h3>Which parameters do you want to include?</h3>
       <div class="card-body">
+        <div class="parameters">
+          <!-- Rounded switch -->
+          <label class="switch lowercase">
+            <input type="checkbox">
+            <span class="slider round" id="lowercase"></span>
+          </label>
+
+          <label class="switch uppercase">
+            <input type="checkbox">
+            <span class="slider round" id="uppercase"></span>
+          </label>
+
+          <label class="switch special">
+            <input type="checkbox">
+            <span class="slider round" id="special"></span>
+          </label>
+
+          <label class="switch numbers">
+            <input type="checkbox">
+            <span class="slider round" id="numbers"></span>
+          </label>
+          <p class="labels">lowercase</p>
+          <p class="labels">uppercase</p>
+          <p class="labels">special characters</p>
+          <p class="labels">numbers</p>
+        </div>
         <textarea readonly id="password" placeholder="Your Secure Password" aria-label="Generated Password"></textarea>
       </div>
       <div class="card-footer">
