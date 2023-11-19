@@ -3,10 +3,12 @@ let password = "";
 
 var generateBtn = document.querySelector("#generate");
 
+// Simple helper function to concantenate strings
 function concatString(x, y) {
   return x.concat(y);
 }
 
+// Gives the user a series of prompts to get their input then stores as an input object
 function getUserInput() {
   input.length = parseInt(prompt("How many characters? (8-128)"));
   if (input.length < 8 || input.length > 128) {
@@ -20,6 +22,7 @@ function getUserInput() {
   return input;
 }
 
+// Creates a custom pool of potential characters for the password based on the user's input
 function characterPool() {
   getUserInput();
   const allLowercase = "abcdefghijklmnopqrstuvwxyz";
@@ -27,47 +30,40 @@ function characterPool() {
   const allSpecial = "#$%&'()*+,-./:;<=>?@[\]^_`{|}~";
   const allNumber = "0123456789";
   let tempString = "";
-  if (input.isLowercase === true) {
+  if (input.isLowercase) {
     tempString = concatString(tempString, allLowercase);
-    console.log("tempString is " + tempString);
   }
 
-  if (input.isUppercase === true) {
+  if (input.isUppercase) {
     tempString = concatString(tempString, allUppercase);
-    console.log("tempString is " + tempString);
   }
 
-  if (input.isSpecial === true) {
+  if (input.isSpecial) {
     tempString = concatString(tempString, allSpecial);
-    console.log("tempString is " + tempString);
   }
 
-  if (input.isNumber === true) {
+  if (input.isNumber) {
     tempString = concatString(tempString, allNumber);
-    console.log("tempString is " + tempString);
   }
-  else if (input.isLowercase === false && input.isUppercase === false && input.isSpecial === false && input.isNumber === false) {
-    alert("Please enter at least one parameter to generate password.")
+  // alerts the user to enter at least one parameter if they have not selected any
+  if (!input.isLowercase && !input.isUppercase && !input.isSpecial && !input.isNumber) {
+    alert("Please enter at least one parameter to generate password.");
   }
-  console.log("Complete tempString is " + tempString);
   return tempString;
 }
 
+// generates password by randomly choosing characters from the pool of potential characters
+// limited by the requested length of the password
 function generatePassword() {
   let characterString = characterPool();
   for (let i = 0; i < input.length; i++) {
     password = concatString(password, (characterString[(Math.floor(Math.random() * characterString.length))]));
-    console.log(password);
   }
-  console.log(password);
   return password;
 }
 
-// Write password to the #password input
+// Writes password to the #password text box
 function writePassword() {
   password = generatePassword();
   document.querySelector("#password").textContent = password;
 }
-
-// Add event listener to generate button
-generateBtn.addEventListener("click", writePassword); 
