@@ -1,5 +1,4 @@
 const input = {};
-let password = "";
 
 var generateBtn = document.querySelector("#generate");
 
@@ -55,15 +54,22 @@ function characterPool() {
 // generates password by randomly choosing characters from the pool of potential characters
 // limited by the requested length of the password
 function generatePassword() {
+  let tempPassword = '';
   let characterString = characterPool();
   for (let i = 0; i < input.length; i++) {
-    password = concatString(password, (characterString[(Math.floor(Math.random() * characterString.length))]));
+    tempPassword = concatString(tempPassword, (characterString[(Math.floor(Math.random() * characterString.length))]));
   }
-  return password;
+  return tempPassword;
 }
 
-// Writes password to the #password text box
+function clearText() {
+  document.querySelector("#password").textContent = '';
+}
+
+// Writes password to the #password text box (clearing previous password first)
 function writePassword() {
-  password = generatePassword();
+  let password = generatePassword();
+  console.log('Password: ', password);
   document.querySelector("#password").textContent = password;
 }
+
