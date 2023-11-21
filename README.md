@@ -4,7 +4,7 @@
 
 This is a simple password generator that offers the user the ability to set parameters for the password including its length and character types (lowercase letters, uppercase letters, special characters and/or numbers). It helps the user quickly come up with a random computer generated password to combat the security concerns that come with less complex passwords.
 
-One challenge I faced is the password criteria of having at least one character from each required parameter (for instance if you needed an 8 character password with only uppercase, lowercase and numbers and randomly generated a password with no numbers). I tried a few different ways and have an idea of how to do it, but for my present purposes, this is unnecessary.
+One challenge I faced is the password criteria of having at least one character from each required parameter (for instance if you needed an 8 character password with only uppercase, lowercase and numbers and randomly generated a password with no numbers). I solved it by "seeding" my password with one character from each character sets then shuffling it to randomize.
 
 ## Installation
 
@@ -27,7 +27,7 @@ A password will be generated back to the password text box. If you would like to
 
 ## Credits
 
-N/A
+![How to shuffle characters of a string in JavaScript](https://www.codespeedy.com/shuffle-characters-of-a-string-in-javascript/)
 
 ## License
 
